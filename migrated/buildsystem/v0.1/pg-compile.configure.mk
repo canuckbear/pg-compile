@@ -29,17 +29,13 @@
 #
 #
 
-# Defines the software version
-SOFTWARE_VERSION = %%SOFTWARE_VERSION%%
 
-# Include software common definitions
-include $(SOFTWARE_UPSTREAM_NAME).mk
+# ------------------------------------------------------------------------------
+#
+# Execute the configure script
+#
 
-# Defines the upstream software name
-SOFTWARE_UPSTREAM_NAME ?= %%SOFTWARE_UPSTREAM_NAME%%
-
-# If this software is a PG_FOUNDRY project, then set the variable
-# PG_FOUNDRY_PROJECT = $(SOFTWARE_UPSTREAM_NAME)
-
-# Include the build system root makefile
-include buildsystem/pg-compile.mk
+configure-%/configure :
+	@echo "    running configure in $(OBJ_DIR)"
+	@cd "$(OBJ_DIR)" && $(CONFIGURE_ENV) $(abspath $*)/configure $(CONFIGURE_ARGS)
+	$(TARGET_DONE)

@@ -29,17 +29,12 @@
 #
 #
 
-# Defines the software version
-SOFTWARE_VERSION = %%SOFTWARE_VERSION%%
+# ------------------------------------------------------------------------------
+#
+# Execute the building script
+#
 
-# Include software common definitions
-include $(SOFTWARE_UPSTREAM_NAME).mk
-
-# Defines the upstream software name
-SOFTWARE_UPSTREAM_NAME ?= %%SOFTWARE_UPSTREAM_NAME%%
-
-# If this software is a PG_FOUNDRY project, then set the variable
-# PG_FOUNDRY_PROJECT = $(SOFTWARE_UPSTREAM_NAME)
-
-# Include the build system root makefile
-include buildsystem/pg-compile.mk
+build-%/Makefile : 
+	@echo "        running make in $*" 
+	echo cd $* && $(BUILD_ENV) $(MAKE) -C $(abspath $(OBJ_DIR)) $(BUILD_ARGS)
+	@$(TARGET_DONE)
