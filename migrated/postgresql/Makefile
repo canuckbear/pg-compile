@@ -36,7 +36,7 @@ SOFTWARE_NAME ?= postgresql
 NEW_SOFTWARE_VERSION = $*
 
 # Create a new software version entry in the repository
-new-software-%:
+new-version-%:
     # Create the directory that will contains the new software
 	@mkdir -p $(NEW_SOFTWARE_VERSION)
 
