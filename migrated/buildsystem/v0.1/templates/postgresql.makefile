@@ -29,43 +29,4 @@
 #
 #
 
-# Defines the software name if not set
-SOFTWARE_NAME ?= postgresql
-
-# Defines the software version
-NEW_SOFTWARE_VERSION = $*
-
-# Create a new software version entry in the repository
-new-software-%:
-    # Create the directory that will contains the new software
-	@mkdir -p $(NEW_SOFTWARE_VERSION)
-
-    # Create the directory that will contains patches on the new software
-	@mkdir -p $(NEW_SOFTWARE_VERSION)/patches
-
-    # Create the directory that will contains specific files for the new software
-	@mkdir -p $(NEW_SOFTWARE_VERSION)/files
-
-    # Copy the Makefile template to the new software directory
-	@cp -f ../buildsystem/current/templates/postgresql.makefile $(NEW_SOFTWARE_VERSION)/Makefile
-
-    # Create a link to the generic software.mk. Link should be removed and a file created
-    # in case of specific need for the given software
-	@(cd $(NEW_SOFTWARE_VERSION) && ln -s ../$(SOFTWARE_NAME).mk $(SOFTWARE_NAME).mk && cd ..)
-
-    # Switch to the software directory and create a link to the build system
-	@(cd $(NEW_SOFTWARE_VERSION) && ln -s ../../buildsystem/current buildsystem && cd ..)
-
-    # Set the software name in the new software Makefile
-	@(sed -i -e "s/%%SOFTWARE_UPSTREAM_NAME%%/$(NEW_SOFTWARE_VERSION)/g" $(NEW_SOFTWARE_VERSION)/Makefile )
-
-    # Last step is to add the new directory to GIT
-#	@git add $(NEW_SOFTWARE_VERSION)
-
-
-# Catch all target. Call the same targets in each subfolder
-%:
-	@for i in $(filter-out $(FILTER_DIRS),$(wildcard */)) ; do \
-		$(MAKE) -C $$i $* ; \
-	done
 
