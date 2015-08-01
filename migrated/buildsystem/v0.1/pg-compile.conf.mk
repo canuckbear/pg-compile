@@ -49,7 +49,7 @@ BUILDER_OPERATING_SYSTEM_VERSION := $(word 2, $(shell lsb_release -c | tr '[:low
 #
 # ------------------------------------------------------------------------------
 
-PG_SITE     = ftp://ftp.postgresql.org/pub/source/
+PG_SITE     = ftp://ftp.postgresql.org/pub/source
 
 
 # ------------------------------------------------------------------------------

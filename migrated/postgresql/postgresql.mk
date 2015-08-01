@@ -33,10 +33,10 @@
 SOFTWARE_UPSTREAM_NAME = postgresql
 
 # Defines the files to retrieve
-SOFTWARE_SOURCE_FILES ?= $(SOFTWARE_UPSTREAM_NAME)-$(SOFTWARE_VERSION).tar.bz2
+SOFTWARE_DIST_FILES ?= $(SOFTWARE_UPSTREAM_NAME)-$(SOFTWARE_VERSION).tar.bz2
 
-# Defines the files to retrieve
-# DISTFILES  = $(SOFTWARE_DISTNAME).tar.bz2
+# Defines the source repository
+SOFTWARE_UPSTREAM_SITES ?= $(PG_SITE)/v$(SOFTWARE_VERSION)
 
 # Definition of the build dependencies
 # BUILD_DEPENDENCIES_PACKAGES = 
