@@ -60,7 +60,7 @@ new-version-%:
 	@(sed -i -e "s/%%SOFTWARE_VERSION%%/$(NEW_SOFTWARE_VERSION)/g" $(NEW_SOFTWARE_VERSION)/Makefile )
 
     # Last step is to add the new directory to GIT
-#	@git add $(NEW_SOFTWARE_VERSION)
+	@git add $(NEW_SOFTWARE_VERSION)
 
 
 # Catch all target. Call the same targets in each subfolder
