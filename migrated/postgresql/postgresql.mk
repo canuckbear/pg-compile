@@ -30,7 +30,10 @@
 #
 
 # Defines the software name if not set
-SOFTWARE_NAME = postgresql
+SOFTWARE_UPSTREAM_NAME = postgresql
+
+# Defines the files to retrieve
+SOFTWARE_SOURCE_FILES ?= $(SOFTWARE_UPSTREAM_NAME)-$(SOFTWARE_VERSION).tar.bz2
 
 # Defines the files to retrieve
 # DISTFILES  = $(SOFTWARE_DISTNAME).tar.bz2
