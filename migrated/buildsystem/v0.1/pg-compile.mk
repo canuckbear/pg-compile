@@ -186,6 +186,7 @@ show-config :
 	@echo "  SOFTWARE_VERSION                  $(SOFTWARE_VERSION)"
 	@echo "  SOFTWARE_FULLNAME                 $(SOFTWARE_FULLNAME)"
 	@echo "  SOFTWARE_DIST_FILES               $(SOFTWARE_DIST_FILES)"
+	@echo "  SOFTWARE_CHECKSUM_FILES           $(SOFTWARE_CHECKSUM_FILES)"
 	@echo
 	@echo "  UPSTREAM_DOWNLOAD_TOOL            $(UPSTREAM_DOWNLOAD_TOOL)"
 	@echo "  SOFTWARE_UPSTREAM_SITES           $(SOFTWARE_UPSTREAM_SITES)"
@@ -247,7 +248,7 @@ prerequisite : $(COOKIE_DIR) pre-everything
 
 # Construct the list of files path under downloaddir which will be processed by
 # the $(DOWNLOAD_DIR)/% target
-FETCH_TARGETS ?=  $(addprefix $(DOWNLOAD_DIR)/,$(SOFTWARE_DIST_FILES))
+FETCH_TARGETS ?=  $(addprefix $(DOWNLOAD_DIR)/,$(SOFTWARE_DIST_FILES)) $(addprefix $(DOWNLOAD_DIR)/,$(SOFTWARE_CHECKSUM_FILES))
 
 fetch : prerequisite $(DOWNLOAD_DIR) $(PARTIAL_DIR) $(COOKIE_DIR) pre-fetch $(FETCH_TARGETS) post-fetch
 	$(DISPLAY_COMPLETED_TARGET_NAME)
