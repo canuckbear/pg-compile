@@ -42,9 +42,11 @@ new-version-%:
 
     # Create the directory that will contains patches on the new software
 	@mkdir -p $(NEW_SOFTWARE_VERSION)/patches
+	@touch $(NEW_SOFTWARE_VERSION)/patches/.gitkeep
 
     # Create the directory that will contains specific files for the new software
 	@mkdir -p $(NEW_SOFTWARE_VERSION)/files
+	@touch $(NEW_SOFTWARE_VERSION)/files/.gitkeep
 
     # Copy the Makefile template to the new software directory
 	@cp -f ../buildsystem/current/templates/postgresql-version.makefile $(NEW_SOFTWARE_VERSION)/Makefile
