@@ -261,7 +261,6 @@ $(DOWNLOAD_DIR)/% :
 		if [ "$(UPSTREAM_DOWNLOAD_TOOL)" = "wget" ] ; then \
 			wget $(WGET_OPTS) -T 30 -c -P $(PARTIAL_DIR) $(SOFTWARE_UPSTREAM_SITES)/$* ; \
 			mv $(PARTIAL_DIR)/$* $@ ; \
-			echo $* $@ ; \
 			if test -r $@ ; then \
 				true ; \
 			else \
