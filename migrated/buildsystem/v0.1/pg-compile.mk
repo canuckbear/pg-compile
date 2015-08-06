@@ -270,20 +270,23 @@ $(DOWNLOAD_DIR)/% :
 		else \
 			echo "Fetch method $(UPSTREAM_DOWNLOAD_TOOL) is not implemented" ; \
 		fi ; \
-		if [ ! "$*" = "$(SOFTWARE_CHECKSUM_FILES)" ] ; then \
-			if grep -- '$*' $(DOWNLOAD_DIR)/$(SOFTWARE_CHECKSUM_FILES) > /dev/null; then  \
-				if cat $(DOWNLOAD_DIR)/$(SOFTWARE_CHECKSUM_FILES) | (cd $(DOWNLOAD_DIR); LC_ALL="C" LANG="C" md5sum -c 2>&1) | grep -- '$*' | grep -v ':[ ]\+OK' > /dev/null; then \
-					echo "        \033[1m[Failed] : checksum of file $* is invalid\033[0m" ; \
+		if [ ! "" = "$(SOFTWARE_CHECKSUM_FILES)" ] ; then \
+			if [ ! "$*" = "$(SOFTWARE_CHECKSUM_FILES)" ] ; then \
+				if grep -- '$*' $(DOWNLOAD_DIR)/$(SOFTWARE_CHECKSUM_FILES) > /dev/null; then  \
+					if cat $(DOWNLOAD_DIR)/$(SOFTWARE_CHECKSUM_FILES) | (cd $(DOWNLOAD_DIR); LC_ALL="C" LANG="C" md5sum -c 2>&1) | grep -- '$*' | grep -v ':[ ]\+OK' > /dev/null; then \
+						echo "        \033[1m[Failed] : checksum of file $* is invalid\033[0m" ; \
+						false; \
+					else \
+						echo "        [  OK   ] : $* checksum is valid	  " ; \
+					fi ;\
+				else  \
+					echo "        \033[1m[Missing] : $* is not in the checksum file\033[0m $(DOWNLOAD_DIR)/$(SOFTWARE_CHECKSUM_FILES)" ; \
 					false; \
-				else \
-					echo "        [  OK   ] : $* checksum is valid	  " ; \
-				fi ;\
-			else  \
-				echo "        \033[1m[Missing] : $* is not in the checksum file\033[0m $(DOWNLOAD_DIR)/$(SOFTWARE_CHECKSUM_FILES)" ; \
-				false; \
+				fi ; \
 			fi ; \
 		fi ; \
 	fi ;
+	$(TARGET_DONE)
 
 
 # ------------------------------------------------------------------------------
@@ -319,7 +322,7 @@ checksum-% : $(CHECKSUM_FILE)
 		fi \
 	else  \
 		echo "        \033[1m[Missing] : $* is not in the checksum file\033[0m" ; \
-		false; \
+		false ; \
 	fi
 	$(TARGET_DONE)
 

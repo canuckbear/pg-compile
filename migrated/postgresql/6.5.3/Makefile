@@ -30,10 +30,14 @@
 #
 
 # Defines the postgresql version
-SOFTWARE_VERSION=6.3
+SOFTWARE_VERSION=6.5.3
 
 # Include software common definitions
 include ../postgresql.mk
+
+# Fix the version name
+SOFTWARE_DIST_FILES     = $(SOFTWARE_UPSTREAM_NAME)-$(SOFTWARE_VERSION).tar.gz 
+SOFTWARE_UPSTREAM_SITES = $(PG_SITE)/v6.5
 
 # Defines the patches to apply on the software
 # PATCHFILES += 0000_some_patch.diff

@@ -35,6 +35,9 @@ SOFTWARE_VERSION=6.2
 # Include software common definitions
 include ../postgresql.mk
 
+# No MD5 available
+SOFTWARE_CHECKSUM_FILES = 
+
 # Defines the patches to apply on the software
 # PATCHFILES += 0000_some_patch.diff
 

@@ -30,7 +30,7 @@
 #
 
 # Defines the postgresql version
-SOFTWARE_VERSION=%%SOFTWARE_VERSION%%
+SOFTWARE_VERSION=9.4.3
 
 # Include software common definitions
 include ../postgresql.mk

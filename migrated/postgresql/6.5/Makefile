@@ -35,6 +35,9 @@ SOFTWARE_VERSION=6.5
 # Include software common definitions
 include ../postgresql.mk
 
+SOFTWARE_DIST_FILES     = $(SOFTWARE_UPSTREAM_NAME)-$(SOFTWARE_VERSION).tar.gz 
+SOFTWARE_CHECKSUM_FILES = 
+
 # Defines the patches to apply on the software
 # PATCHFILES += 0000_some_patch.diff
 
