@@ -272,7 +272,6 @@ $(DOWNLOAD_DIR)/% :
 			echo "Fetch method $(UPSTREAM_DOWNLOAD_TOOL) is not implemented" ; \
 		fi ; \
 		if [ ! "$*" = "$(SOFTWARE_CHECKSUM_FILES)" ] ; then \
-			echo "Je teste le MD5" ; \
 			if grep -- '$*' $(DOWNLOAD_DIR)/$(SOFTWARE_CHECKSUM_FILES) > /dev/null; then  \
 				if cat $(DOWNLOAD_DIR)/$(SOFTWARE_CHECKSUM_FILES) | (cd $(DOWNLOAD_DIR); LC_ALL="C" LANG="C" md5sum -c 2>&1) | grep -- '$*' | grep -v ':[ ]\+OK' > /dev/null; then \
 					echo "        \033[1m[Failed] : checksum of file $* is invalid\033[0m" ; \
