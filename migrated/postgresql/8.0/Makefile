@@ -30,10 +30,13 @@
 #
 
 # Defines the postgresql version
-SOFTWARE_VERSION=8.0
+SOFTWARE_VERSION=8.0.0
 
 # Include software common definitions
 include ../postgresql.mk
+
+# Fix the version name
+SOFTWARE_UPSTREAM_SITES = $(PG_SITE)/v8.0
 
 # Defines the patches to apply on the software
 # PATCHFILES += 0000_some_patch.diff
