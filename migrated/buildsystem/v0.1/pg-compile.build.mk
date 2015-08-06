@@ -35,6 +35,17 @@
 #
 
 build-%/Makefile : 
-	@echo "        running make in $*" 
-	echo cd $* && $(BUILD_ENV) $(MAKE) -C $(abspath $(OBJ_DIR)) $(BUILD_ARGS)
+	@if test -f $(COOKIE_DIR)/build-$*/Makefile ; then \
+		true ; \
+	else \
+		echo "        running make in $*"  ; \
+		echo cd $* && $(BUILD_ENV) $(MAKE) -C $(abspath $(OBJ_DIR)) $(BUILD_ARGS) ; \
+	fi ; 
 	@$(TARGET_DONE)
+
+rebuild-%/Makefile :
+	@if test -f $(COOKIE_DIR)/build-$*/Makefile ; then \
+		rm -f $(COOKIE_DIR)/build-$*/Makefile ; \
+	fi ; 
+	$(TARGET_DONE)
+
