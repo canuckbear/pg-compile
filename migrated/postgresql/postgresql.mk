@@ -41,7 +41,7 @@ SOFTWARE_UPSTREAM_SITES ?= $(PG_SITE)/v$(SOFTWARE_VERSION)
 
 # Definition of the build dependencies
 # BUILD_DEPENDENCIES_PACKAGES = 
-# BUILD_DEPENDENCIES_PACKAGES_DEBIAN =
+# BUILD_DEPENDENCIES_PACKAGES_DEBIAN =  build-essential libreadline-dev zlib1g-dev flex bison libxml2-dev libxslt-dev libssl-dev
 
 # Argument for configure step
 CONFIGURE_ARGS = --with-libxml --with-libxslt --with-openssl
