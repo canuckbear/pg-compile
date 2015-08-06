@@ -66,8 +66,8 @@ new-version-%:
 
 
 # Catch all target. Call the same targets in each subfolder
-G%:
+%:
 	@for i in $(filter-out $(FILTER_DIRS),$(wildcard */)) ; do \
-		$(MAKE) -C $$i $* || exit 1 ; \
+		$(MAKE) -C $$i $* || exit 1  \
 	done
 
