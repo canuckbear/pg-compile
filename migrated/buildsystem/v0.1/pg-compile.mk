@@ -248,7 +248,7 @@ prerequisite : $(COOKIE_DIR) pre-everything
 
 # Construct the list of files path under downloaddir which will be processed by
 # the $(DOWNLOAD_DIR)/% target
-FETCH_TARGETS ?=  $(addprefix $(DOWNLOAD_DIR)/,$(SOFTWARE_DIST_FILES)) $(addprefix $(DOWNLOAD_DIR)/,$(SOFTWARE_CHECKSUM_FILES))
+FETCH_TARGETS ?=  $(addprefix $(DOWNLOAD_DIR)/,$(SOFTWARE_CHECKSUM_FILES)) $(addprefix $(DOWNLOAD_DIR)/,$(SOFTWARE_DIST_FILES))
 
 fetch : prerequisite $(DOWNLOAD_DIR) $(PARTIAL_DIR) $(COOKIE_DIR) pre-fetch $(FETCH_TARGETS) post-fetch
 	$(DISPLAY_COMPLETED_TARGET_NAME)
@@ -261,6 +261,7 @@ $(DOWNLOAD_DIR)/% :
 		if [ "$(UPSTREAM_DOWNLOAD_TOOL)" = "wget" ] ; then \
 			wget $(WGET_OPTS) -T 30 -c -P $(PARTIAL_DIR) $(SOFTWARE_UPSTREAM_SITES)/$* ; \
 			mv $(PARTIAL_DIR)/$* $@ ; \
+			echo $* $@ ; \
 			if test -r $@ ; then \
 				true ; \
 			else \
@@ -269,6 +270,20 @@ $(DOWNLOAD_DIR)/% :
 			fi; \
 		else \
 			echo "Fetch method $(UPSTREAM_DOWNLOAD_TOOL) is not implemented" ; \
+		fi ; \
+		if [ ! "$*" = "$(SOFTWARE_CHECKSUM_FILES)" ] ; then \
+			echo "Je teste le MD5" ; \
+			if grep -- '$*' $(DOWNLOAD_DIR)/$(SOFTWARE_CHECKSUM_FILES) > /dev/null; then  \
+				if cat $(DOWNLOAD_DIR)/$(SOFTWARE_CHECKSUM_FILES) | (cd $(DOWNLOAD_DIR); LC_ALL="C" LANG="C" md5sum -c 2>&1) | grep -- '$*' | grep -v ':[ ]\+OK' > /dev/null; then \
+					echo "        \033[1m[Failed] : checksum of file $* is invalid\033[0m" ; \
+					false; \
+				else \
+					echo "        [  OK   ] : $* checksum is valid	  " ; \
+				fi ;\
+			else  \
+				echo "        \033[1m[Missing] : $* is not in the checksum file\033[0m $(DOWNLOAD_DIR)/$(SOFTWARE_CHECKSUM_FILES)" ; \
+				false; \
+			fi ; \
 		fi ; \
 	fi ;
 
