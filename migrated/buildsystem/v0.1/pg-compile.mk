@@ -387,7 +387,7 @@ configure : patch $(OBJ_DIR) pre-configure $(CONFIGURE_TARGETS) post-configure
 
 RECONFIGURE_TARGETS ?= $(addprefix reconfigure-,$(CONFIGURE_SCRIPTS))
 
-reconfigure : patch $(OBJ_DIR) pre-reconfigure $(RECONFIGURE_TARGETS) configure post-reconfigure
+reconfigure : patch pre-reconfigure $(RECONFIGURE_TARGETS) configure post-reconfigure
 	$(DISPLAY_COMPLETED_TARGET_NAME)
 	$(TARGET_DONE)
 
@@ -423,7 +423,7 @@ build : configure $(OBJ_DIR) pre-build $(BUILD_TARGETS) post-build
 
 REBUILD_TARGETS ?= $(addprefix rebuild-,$(BUILD_CHECK_SCRIPTS)) $(addprefix rebuild-,$(BUILD_SCRIPTS))
 
-rebuild : configure $(OBJ_DIR) pre-rebuild $(REBUILD_TARGETS) build post-rebuild
+rebuild : configure pre-rebuild $(REBUILD_TARGETS) build post-rebuild
 	$(DISPLAY_COMPLETED_TARGET_NAME)
 	$(TARGET_DONE)
 
@@ -433,9 +433,16 @@ rebuild : configure $(OBJ_DIR) pre-rebuild $(REBUILD_TARGETS) build post-rebuild
 # Install software to the target directory
 #
 
-INSTALL_TARGETS ?= $(addprefix install-,$(INSTALL_SCRIPTS))
+install : build $(INSTALL_DIR) pre-install do-install post-install
+	$(DISPLAY_COMPLETED_TARGET_NAME)
+	$(TARGET_DONE)
 
-install : build $(INSTALL_DIR) pre-install $(INSTALL_TARGETS) post-install
+# ------------------------------------------------------------------------------
+#
+# Execute once again the install target
+#
+
+reinstall : build pre-reinstall do-reinstall install post-reinstall
 	$(DISPLAY_COMPLETED_TARGET_NAME)
 	$(TARGET_DONE)
 
