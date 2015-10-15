@@ -36,7 +36,6 @@ SOFTWARE_VERSION=6.1
 include ../postgresql.mk
 
 # Fix the version name
-SOFTWARE_DIST_FILES     = $(SOFTWARE_UPSTREAM_NAME).$(SOFTWARE_VERSION).tar.gz 
 SOFTWARE_CHECKSUM_FILES = 
 
 # Defines the patches to apply on the software
