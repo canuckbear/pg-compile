@@ -92,8 +92,3 @@ BUILD_SCRIPTS       ?= $(WORK_SRC)/Makefile
 
 # prepend the local file listing
 #FILE_SITES = $(foreach DIR,$(FILEDIR) $(GARCHIVEPATH),file://$(DIR)/)
-
-# Definition of the package that must be installed on each build platform
-#PREREQUISITE_BASE_PKGS ?= make
-#PREREQUISITE_BASE_PKGS_UBUNTU ?= build-essential
-

@@ -49,3 +49,13 @@ rebuild-%/Makefile :
 	fi ; 
 	$(TARGET_DONE)
 
+
+
+# ------------------------------------------------------------------------------
+#
+# Definition of the package that must be installed on each build platform
+#
+
+PREREQUISITE_BASE_PKGS ?= make
+PREREQUISITE_BASE_PKGS_UBUNTU ?= build-essential
+PREREQUISITE_BASE_PKGS_DEBIAN ?= build-essential
