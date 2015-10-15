@@ -53,7 +53,7 @@ new-version-%:
 
     # Create a link to the generic software.mk. Link should be removed and a file created
     # in case of specific need for the given software
-	@(cd $(NEW_SOFTWARE_VERSION) && ln -s ../$(SOFTWARE_NAME).mk $(SOFTWARE_NAME).mk && cd ..)
+	@(cd $(NEW_SOFTWARE_VERSION) && ln -s ../$(SOFTWARE_UPSTREAM_NAME).mk $(SOFTWARE_UPSTREAM_NAME).mk && cd ..)
 
     # Switch to the software directory and create a link to the build system
 	@(cd $(NEW_SOFTWARE_VERSION) && ln -s ../../buildsystem/current buildsystem && cd ..)
